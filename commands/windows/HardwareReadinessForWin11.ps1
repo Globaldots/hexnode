@@ -5,7 +5,7 @@
 
 #######################################################################
 # Invoke in Hexnode with the following parameters:
-# -DeviceID "%deviceid%" -APIKey YOUR-API-KEY
+# -DeviceID "%deviceid%" -APIKey YOUR-API-KEY -HexnodeInstance YOUR-INSTANCE
 #######################################################################
 
 <#
@@ -44,11 +44,13 @@ param (
     [Parameter()]
     [string]$CustomField,
     [string]$DeviceID,
-    [string]$APIKey
+    [string]$APIKey,
+    [string]$HexnodeInstance
 )
 
-# The following wildcards can be used to pass Arguments to the script:
-#   %devicename%, %model%, %serialnumber%, %imei%, %osname%, %osversion%, %deviceid%, %phonenumber%, %name%, %email%, %username%, %domain%, %netbiosname%, %assettag%, %department%, %devicenotes%, %userprincipalname% and %alternateemail%.
+    # The following Hexnode wildcards can be used to pass Arguments to the script:
+    #   %devicename%, %model%, %serialnumber%, %imei%, %osname%, %osversion%, %deviceid%, %phonenumber%, %name%, %email%, %username%, %domain%, %netbiosname%, %assettag%, %department%, %devicenotes%, %userprincipalname% and %alternateemail%.
+
 begin {
     if ($env:customFieldName -and $env:customFieldName -notlike "null") { $CustomField = $env:customFieldName }
     function Get-HardwareReadiness() {
@@ -551,11 +553,12 @@ using System.Runtime.InteropServices;
 		param (
 			[string]$apikey,
 			[string]$deviceid,
-			[string]$status
+			[string]$status,
+			[string]$HexnodeInstance
 		)
 
 		# Define the URL
-		$url = "https://globaldots.hexnodemdm.com/api/v1/devices/"
+		$url = "https://$($HexnodeInstance).hexnodemdm.com/api/v1/devices/"
 
 		# Define headers
 		$headers = @{
@@ -607,12 +610,12 @@ process {
     # Print Return Result
 	$upgrade_status = $Result.returnResult
     Write-Host "Can be upgraded: $($Result.returnResult)"
-	if ($APIKey -and $DeviceID) {
+	if ($APIKey -and $DeviceID -and $HexnodeInstance) {
 		Write-Host "DeviceID: $($DeviceID)"
 		# Call the function with the parameters provided
-		UpdateStatusHexnode -apikey $APIKey -deviceid $DeviceID -status $upgrade_status
+		UpdateStatusHexnode -apikey $APIKey -deviceid $DeviceID -status $upgrade_status -HexnodeInstance $HexnodeInstance
 	} else {
-	    Write-Host "API Key and Device ID not provided. Skipping Hexnode update."
+	    Write-Host "API Key, Device ID or Hexnode instance not provided. Skipping Hexnode update."
     }
     exit $Result.returnCode
 }
