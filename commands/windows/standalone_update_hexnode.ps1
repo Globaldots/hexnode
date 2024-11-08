@@ -1,18 +1,20 @@
 param (
     [string]$apikey,
     [string]$deviceid,
-    [string]$status
+    [string]$status,
+    [string]$HexnodeInstance
 )
 
 function UpdateStatusHexnode {
     param (
         [string]$apikey,
         [string]$deviceid,
-        [string]$status
+        [string]$status,
+        [string]$HexnodeInstance
     )
 
     # Define the URL
-    $url = "https://globaldots.hexnodemdm.com/api/v1/devices/"
+    $url = "https://$($HexnodeInstance).hexnodemdm.com/api/v1/devices/"
 
     # Define headers
     $headers = @{
@@ -46,4 +48,4 @@ function UpdateStatusHexnode {
 }
 
 # Call the function with the parameters provided
-UpdateStatusHexnode -apikey $apikey -deviceid $deviceid -status $status
+UpdateStatusHexnode -apikey $apikey -deviceid $deviceid -status $status -HexnodeInstance $HexnodeInstance
