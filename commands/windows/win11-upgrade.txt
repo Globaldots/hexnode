@@ -1,0 +1,12 @@
+My Question:
+How can I use Hexnode to identify which Windows PCs on version 10 can or cannot be upgraded to Windows 11?
+
+Hexnode support Answer:
+To identify Windows PCs on version 10 that cannot be upgraded to Windows 11 using Hexnode,
+navigate to the device management section, utilize the "Patches & Updates" feature to scan for updates on each device,
+and filter the results to show only devices with a Windows 10 version that doesn't meet the minimum requirements for Windows 11 upgrade;
+you can further analyze details like the specific Windows 10 version and potential reasons for incompatibility
+based on the updated information provided by Hexnode.
+Here is the detailed documentation:
+Manage Windows Update Preferences and Settings from Hexnode UEM:
+https://www.hexnode.com/mobile-device-management/help/manage-windows-update-preferences-and-settings/
