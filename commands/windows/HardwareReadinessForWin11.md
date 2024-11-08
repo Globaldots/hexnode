@@ -7,6 +7,7 @@ The script checks the following requirements:
 * CPU
 * RAM
 * Storage
+
 After the evaluation, the script optionally calls back to the Hexnode server with the results.
 
 ### Installation and preparations for usage
