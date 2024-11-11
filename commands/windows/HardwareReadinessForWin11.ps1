@@ -573,7 +573,7 @@ using System.Runtime.InteropServices;
 			"devicedata" = @(
 				@{
 					"deviceID" = $deviceid
-					"device_notes" = "Can be upgraded: $status"
+					"device_notes" = "Win11: $status"
 				}
 			)
 		}
@@ -609,7 +609,7 @@ process {
 
     # Print Return Result
 	$upgrade_status = $Result.returnResult
-    Write-Host "Can be upgraded: $($Result.returnResult)"
+    Write-Host "Win11: $($Result.returnResult)"
 	if ($APIKey -and $DeviceID -and $HexnodeInstance) {
 		Write-Host "DeviceID: $($DeviceID)"
 		# Call the function with the parameters provided
