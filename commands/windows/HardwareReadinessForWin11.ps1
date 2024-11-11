@@ -573,7 +573,7 @@ using System.Runtime.InteropServices;
 			"devicedata" = @(
 				@{
 					"deviceID" = $deviceid
-					"device_notes" = "Upgrade status: $status"
+					"device_notes" = "Can be upgraded: $status"
 				}
 			)
 		}
