@@ -15,6 +15,7 @@ After the evaluation, the script optionally calls back to the Hexnode server wit
 * Upload the script `HardwareReadinessForWin11.ps1` to your Hexnode content repository.
 * Have an API key avaliable
 * Prepare a custom report, filtered by "OS Name" that should contain "Windows 10"
+* Prepare a dynamic group, filtered by "OS Name" that should contain "Windows 10". The dynamic group will be used to execute the script on its members rather that individually.
 * Ensure that the field "Device note" is included in the report, as it will be used to store the results of the script.
 * The script may fail to complete if the Windows firewall is blocking apps from outbound HTTPS connections on port 443. If that happens, run [the script to open port 443](open-firewall-access-443.ps1) for the Hexnode agent.
 
