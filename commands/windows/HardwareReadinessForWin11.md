@@ -32,4 +32,5 @@ Replace YOUR-API-KEY with your Hexnode API key and YOUR-INSTANCE with your Hexno
 If the parameters are missing, the scripty still runs and its results will be available to view in the device actions.
 
 ### Credits
-https://www.ninjaone.com/script-hub/windows-11-compatibility-check-powershell/
+* https://www.ninjaone.com/script-hub/windows-11-compatibility-check-powershell/
+* https://techcommunity.microsoft.com/t5/microsoft-endpoint-manager-blog/understanding-readiness-for-windows-11-with-microsoft-endpoint/ba-p/2770866

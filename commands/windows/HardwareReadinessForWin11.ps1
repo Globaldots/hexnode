@@ -1,6 +1,6 @@
 #Requires -Version 5.1
 
-# Original script source:
+# Inspired by the Microsoft Hardware Readiness script for Windows 11:
 # https://www.ninjaone.com/script-hub/windows-11-compatibility-check-powershell/
 
 #######################################################################
@@ -28,21 +28,13 @@
     Failed To Run
 .NOTES
     Minimum OS Architecture Supported: Windows 10
-    Release Notes: Renamed script and added Script Variable support. Also replaced Get-WmiObject with Get-CimInstance.
-By using this script, you indicate your acceptance of the following legal terms as well as our Terms of Use at https://www.ninjaone.com/terms-of-use.
-    Ownership Rights: NinjaOne owns and will continue to own all right, title, and interest in and to the script (including the copyright). NinjaOne is giving you a limited license to use the script in accordance with these legal terms.
-    Use Limitation: You may only use the script for your legitimate personal or internal business purposes, and you may not share the script with another party.
-    Republication Prohibition: Under no circumstances are you permitted to re-publish the script in any script library or website belonging to or under the control of any other software provider.
-    Warranty Disclaimer: The script is provided “as is” and “as available”, without warranty of any kind. NinjaOne makes no promise or guarantee that the script will be free from defects or that it will meet your specific needs or expectations.
     Assumption of Risk: Your use of the script is at your own risk. You acknowledge that there are certain inherent risks in using the script, and you understand and assume each of those risks.
-    Waiver and Release: You will not hold NinjaOne responsible for any adverse or unintended consequences resulting from your use of the script, and you waive any legal or equitable rights or remedies you may have against NinjaOne relating to your use of the script.
-    EULA: If you are a NinjaOne customer, your use of the script is subject to the End User License Agreement applicable to you (EULA).
+
 #>
 
 [CmdletBinding()]
 param (
     [Parameter()]
-    [string]$CustomField,
     [string]$DeviceID,
     [string]$APIKey,
     [string]$HexnodeInstance
@@ -52,7 +44,6 @@ param (
     #   %devicename%, %model%, %serialnumber%, %imei%, %osname%, %osversion%, %deviceid%, %phonenumber%, %name%, %email%, %username%, %domain%, %netbiosname%, %assettag%, %department%, %devicenotes%, %userprincipalname% and %alternateemail%.
 
 begin {
-    if ($env:customFieldName -and $env:customFieldName -notlike "null") { $CustomField = $env:customFieldName }
     function Get-HardwareReadiness() {
         # Modified copy of https://aka.ms/HWReadinessScript minus the signature, as of 7/26/2023.
         # Only modification was replacing Get-WmiObject with Get-CimInstance for PowerShell 7 compatibility
@@ -597,15 +588,13 @@ using System.Runtime.InteropServices;
 process {
     $Result = Get-HardwareReadiness | Select-Object -Unique | ConvertFrom-Json
 
-    if ($CustomField -and -not [string]::IsNullOrEmpty($CustomField) -and -not [string]::IsNullOrWhiteSpace($CustomField)) {
-        Switch ($Result.returnCode) {
-            0 { Ninja-Property-Set -Name $CustomField -Value "Capable" }
-            1 { Ninja-Property-Set -Name $CustomField -Value "Not Capable" }
-            -1 { Ninja-Property-Set -Name $CustomField -Value "Undetermined" }
-            -2 { Ninja-Property-Set -Name $CustomField -Value "Failed To Run" }
-            default { Ninja-Property-Set -Name $CustomField -Value "Unknown" }
-        }
-    }
+#        Switch ($Result.returnCode) {
+#            0 { $upgrade_status = "Capable" }
+#            1 { $upgrade_status = "Not Capable" }
+#            -1 { $upgrade_status = "Undetermined" }
+#            -2 { $upgrade_status = "Failed To Run" }
+#            default { $upgrade_status = "Unknown" }
+#        }
 
     # Print Return Result
 	$upgrade_status = $Result.returnResult
